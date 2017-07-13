@@ -13,7 +13,7 @@ class MyApp : Application() {
         var testing = false
             private set
 
-        fun testMode() {
+        fun inMemoryMode() {
             testing = true
         }
     }

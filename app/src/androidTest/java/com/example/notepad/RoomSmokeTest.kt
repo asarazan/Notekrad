@@ -17,7 +17,7 @@ class RoomSmokeTest {
 
     @Before
     fun createDb() {
-        MyApp.testMode()
+        MyApp.inMemoryMode()
     }
 
     @Test
