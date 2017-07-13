@@ -11,11 +11,12 @@ object DataStore {
     lateinit var notes: NoteDatabase
         private set
 
-    fun init(c: Context, inMemory: Boolean = false) {
-        notes = if (inMemory) {
-            Room.inMemoryDatabaseBuilder(c, NoteDatabase::class.java).build()
-        } else {
-            Room.databaseBuilder(c, NoteDatabase::class.java, "notes").build()
-        }
+    fun init(c: Context) {
+        notes = Room.databaseBuilder(c, NoteDatabase::class.java, "notes").build()
+    }
+
+    fun inMemoryTesting(c: Context) {
+        notes.close()
+        notes = Room.inMemoryDatabaseBuilder(c, NoteDatabase::class.java).build()
     }
 }

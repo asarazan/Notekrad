@@ -1,5 +1,6 @@
 package com.example.notepad
 
+import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import com.example.notepad.data.DataStore
 import com.example.notepad.data.Note
@@ -17,7 +18,7 @@ class RoomSmokeTest {
 
     @Before
     fun createDb() {
-        MyApp.inMemoryMode()
+        DataStore.inMemoryTesting(InstrumentationRegistry.getContext())
     }
 
     @Test
