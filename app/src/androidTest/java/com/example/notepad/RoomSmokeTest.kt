@@ -1,12 +1,8 @@
 package com.example.notepad
 
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import com.example.notepad.data.DataStore
 import com.example.notepad.data.Note
-import com.example.notepad.data.NoteDao
-import com.example.notepad.data.NoteDatabase
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -19,19 +15,9 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class RoomSmokeTest {
 
-    private lateinit var noteDao: NoteDao
-    private lateinit var db: NoteDatabase
-
     @Before
     fun createDb() {
-        val context = InstrumentationRegistry.getTargetContext()
-        db = Room.inMemoryDatabaseBuilder(context, NoteDatabase::class.java).build()
-        noteDao = db.notesDao()
-    }
-
-    @After
-    fun closeDb() {
-        db.close()
+        MyApp.testMode()
     }
 
     @Test
@@ -39,8 +25,8 @@ class RoomSmokeTest {
         val note = Note().apply {
             text = "foo bar!"
         }
-        noteDao.insert(note)
-        val all = noteDao.getAll()
+        DataStore.notes.notesDao().insert(note)
+        val all = DataStore.notes.notesDao().getAll()
         assertEquals(1, all.size)
         assertEquals("foo bar!", all.first().text)
     }
