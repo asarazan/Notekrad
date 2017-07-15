@@ -23,6 +23,7 @@
         <activity android:name=".crud.CrudActivity"
             android:windowSoftInputMode="stateVisible|adjustPan"
             />
+        <activity android:name=".JavaMainActivity" />
     </application>
 
 </manifest>

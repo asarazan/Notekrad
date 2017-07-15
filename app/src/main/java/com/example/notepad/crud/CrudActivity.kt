@@ -17,6 +17,8 @@ import org.threeten.bp.Instant
 class CrudActivity : AppCompatActivity() {
     companion object {
         private const val KEY_NOTE = "note"
+
+        @JvmStatic
         fun create(c: Context) = Intent(c, CrudActivity::class.java)
         fun update(c: Context, note: Note) = Intent(c, CrudActivity::class.java).putExtra(KEY_NOTE, note.id)
     }
