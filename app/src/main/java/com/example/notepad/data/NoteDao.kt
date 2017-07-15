@@ -13,10 +13,10 @@ import io.reactivex.Flowable
 @Dao
 interface NoteDao {
 
-    @Query("select * from note")
+    @Query("select * from note order by created_at desc")
     fun getAll(): Flowable<List<Note>>
 
-    @Query("select * from note where id in (:arg0)")
+    @Query("select * from note where id in (:arg0) order by created_at desc")
     fun loadAllByIds(ids: IntArray): Flowable<List<Note>>
 
     @Insert
