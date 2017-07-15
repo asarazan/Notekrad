@@ -36,6 +36,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
 
     override fun onDetachedFromRecyclerView(recyclerView: RecyclerView?) {
         subscription?.dispose()
+        subscription = null
     }
 
     override fun getItemId(position: Int): Long {
