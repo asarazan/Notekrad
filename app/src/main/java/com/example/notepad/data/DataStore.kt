@@ -11,6 +11,7 @@ object DataStore {
     lateinit var notes: NoteDatabase
         private set
 
+    @JvmStatic
     fun init(c: Context) {
         notes = Room.databaseBuilder(c, NoteDatabase::class.java, "notes").build()
     }

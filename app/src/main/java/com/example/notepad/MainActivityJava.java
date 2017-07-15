@@ -18,7 +18,7 @@ import com.example.notepad.recycler.NotesAdapter;
  * Created by Aaron Sarazan on 7/15/17.
  */
 
-public class JavaMainActivity extends AppCompatActivity {
+public class MainActivityJava extends AppCompatActivity {
 
     private RecyclerView recycler;
 
@@ -34,7 +34,7 @@ public class JavaMainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(CrudActivity.create(JavaMainActivity.this));
+                startActivity(CrudActivity.create(MainActivityJava.this));
             }
         });
 
