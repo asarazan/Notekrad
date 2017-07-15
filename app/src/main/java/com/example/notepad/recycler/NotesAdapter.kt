@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.example.notepad.R
 import com.example.notepad.data.DataStore
 import com.example.notepad.data.Note
+import com.example.notepad.extensions.android
 import com.example.notepad.extensions.layoutInflater
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -26,8 +27,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
         subscription = DataStore.notes.notesDao().getAll()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+                .android()
                 .subscribe {
                     notes = it
                     notifyDataSetChanged()
