@@ -14,7 +14,7 @@ public final class NotesContract {
 
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + _TABLE_NAME + " (" +
-            NoteTable._ID + " INTEGER PRIMARY KEY, " +
+            NoteTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
             NoteTable.TEXT + " TEXT, " +
             NoteTable.IS_PINNED + " INTEGER, " +
             NoteTable.CREATED_AT + " INTEGER, " +

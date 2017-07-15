@@ -52,7 +52,7 @@ public final class NoteDaoSql {
         int i = 0;
         while (i++ < ids.length) {
             questionMarks.append("?");
-            if (i != ids.length - 1) {
+            if (i <= ids.length - 1) {
                 questionMarks.append(", ");
             }
         }
@@ -68,7 +68,7 @@ public final class NoteDaoSql {
                 null,
                 null,
                 CREATED_AT);
-        List<Note> retval = new ArrayList<>();
+        List<Note> retval = allFromCursor(cursor);
         cursor.close();
         return retval;
     }
@@ -112,9 +112,20 @@ public final class NoteDaoSql {
         return note;
     }
 
+    private static List<Note> allFromCursor(Cursor cursor) {
+        List<Note> retval = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            retval.add(fromCursor(cursor));
+        }
+        return retval;
+    }
+
     private static ContentValues fromNote(Note note) {
         ContentValues values = new ContentValues();
-        values.put(_ID, note.getId());
+        int id = note.getId();
+        if (id != -1) {
+            values.put(_ID, id);
+        }
         values.put(TEXT, note.getText());
         values.put(IS_PINNED, note.isPinned());
         values.put(CREATED_AT, note.getCreatedAt().toEpochMilli());

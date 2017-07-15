@@ -27,6 +27,11 @@ class MainActivity : AppCompatActivity() {
         recycler.adapter = NotesAdapter()
     }
 
+    override fun onResume() {
+        super.onResume()
+        refresh()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         recycler.adapter = null
@@ -46,5 +51,9 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun refresh() {
+        (recycler.adapter as NotesAdapter).refresh()
     }
 }

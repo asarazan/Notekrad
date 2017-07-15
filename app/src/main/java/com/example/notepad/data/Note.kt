@@ -13,7 +13,7 @@ import org.threeten.bp.Instant
 class Note {
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Int = -1
 
     /**
      * This is nullable because eventually we may want other media types.

@@ -9,7 +9,7 @@ import android.view.MenuItem
 import com.example.notepad.R
 import com.example.notepad.data.DataStore
 import com.example.notepad.data.Note
-import com.example.notepad.extensions.android
+import com.example.notepad.extensions.postToMain
 import kotlinx.android.synthetic.main.activity_crud.*
 import org.jetbrains.anko.doAsync
 import org.threeten.bp.Instant
@@ -28,12 +28,12 @@ class CrudActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crud)
         if (isUpdateMode) {
-            DataStore.notes.notesDao().loadAllByIds(intent.getIntExtra(KEY_NOTE, -1))
-                    .android()
-                    .subscribe {
-                        if (note == null) note = it.first()
-                        update()
-                    }
+            doAsync {
+                note = DataStore.notes.notesDao().loadAllByIds(intent.getIntExtra(KEY_NOTE, -1)).first()
+                postToMain {
+                    update()
+                }
+            }
         }
     }
 

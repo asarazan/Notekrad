@@ -7,35 +7,38 @@ import com.example.notepad.R
 import com.example.notepad.crud.CrudActivity
 import com.example.notepad.data.DataStore
 import com.example.notepad.data.Note
-import com.example.notepad.extensions.android
 import com.example.notepad.extensions.layoutInflater
-import io.reactivex.disposables.Disposable
+import com.example.notepad.extensions.postToMain
 import kotlinx.android.synthetic.main.item_note.view.*
+import org.jetbrains.anko.doAsync
 
 /**
  * Created by Aaron Sarazan on 7/5/17.
  */
 class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
 
-    private var subscription: Disposable? = null
     private var notes = listOf<Note>()
+    private var refreshing = false
 
     init {
         setHasStableIds(true)
     }
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
-        subscription = DataStore.notes.notesDao().getAll()
-                .android()
-                .subscribe {
-                    notes = it
-                    notifyDataSetChanged()
-                }
+    fun refresh() {
+        if (refreshing) return
+        refreshing = true
+        doAsync {
+            val tmpNotes = DataStore.notes.notesDao().getAll()
+            postToMain {
+                notes = tmpNotes
+                refreshing = false
+                notifyDataSetChanged()
+            }
+        }
     }
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView?) {
-        subscription?.dispose()
-        subscription = null
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+        refresh()
     }
 
     override fun getItemId(position: Int): Long {
