@@ -27,13 +27,17 @@ class MainActivity : AppCompatActivity() {
                 DataStore.notes.notesDao().insert(Note().apply {
                     text = "Hi There!"
                 })
-                (recycler.adapter as NotesAdapter).refresh()
             }
         }
 
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.addItemDecoration(SpaceItemDecoration(this, R.dimen.padding_normal, LinearLayoutManager.VERTICAL))
         recycler.adapter = NotesAdapter()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        recycler.adapter = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
