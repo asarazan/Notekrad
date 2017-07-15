@@ -8,9 +8,7 @@ import com.example.notepad.data.DataStore
 import com.example.notepad.data.Note
 import com.example.notepad.extensions.android
 import com.example.notepad.extensions.layoutInflater
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.item_note.view.*
 
 /**

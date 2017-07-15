@@ -17,7 +17,7 @@ interface NoteDao {
     fun getAll(): Flowable<List<Note>>
 
     @Query("select * from note where id in (:arg0) order by created_at desc")
-    fun loadAllByIds(ids: IntArray): Flowable<List<Note>>
+    fun loadAllByIds(vararg ids: Int): Flowable<List<Note>>
 
     @Insert
     fun insert(vararg notes: Note)
