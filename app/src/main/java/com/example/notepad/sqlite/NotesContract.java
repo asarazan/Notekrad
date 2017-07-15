@@ -2,6 +2,7 @@ package com.example.notepad.sqlite;
 
 import android.provider.BaseColumns;
 
+import static com.example.notepad.sqlite.NotesContract.NoteTable.CREATED_AT;
 import static com.example.notepad.sqlite.NotesContract.NoteTable._TABLE_NAME;
 
 /**
@@ -22,6 +23,9 @@ public final class NotesContract {
 
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + _TABLE_NAME;
+
+    public static final String SQL_QUERY_ALL =
+            "SELECT * FROM NOTE ORDER BY " + CREATED_AT + " DESC";
 
     public static class NoteTable implements BaseColumns {
         public static final String _TABLE_NAME = "notes";
