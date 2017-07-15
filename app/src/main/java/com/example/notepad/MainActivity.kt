@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.addItemDecoration(SpaceItemDecoration(this, R.dimen.padding_normal, LinearLayoutManager.VERTICAL))
+        recycler.addItemDecoration(SpaceItemDecoration(this, R.dimen.margin_small, LinearLayoutManager.VERTICAL))
         recycler.adapter = NotesAdapter()
     }
 

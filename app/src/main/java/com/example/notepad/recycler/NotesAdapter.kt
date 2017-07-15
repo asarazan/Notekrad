@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.notepad.R
+import com.example.notepad.crud.CrudActivity
 import com.example.notepad.data.DataStore
 import com.example.notepad.data.Note
 import com.example.notepad.extensions.android
@@ -50,10 +51,16 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
-        holder.text.text = notes[position].text
+        val note = notes[position]
+        val context = holder.itemView.context
+        holder.text.text = note.text
+        holder.content.setOnClickListener {
+            context.startActivity(CrudActivity.update(context, note))
+        }
     }
 
     class NotesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val text by lazy { itemView.text }
+        val content by lazy { itemView.content }
     }
 }
